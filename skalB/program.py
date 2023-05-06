@@ -3,11 +3,11 @@ COMP30024 Artificial Intelligence, Semester 1 2023
 Project Part B: Game Playing Agent
 """
 
-from agent.logger import Logger
 from referee.game import \
     PlayerColor, Action, SpawnAction, SpreadAction, HexPos, HexDir
 
-from agent.board import Board
+from skalB.logger import Logger
+from skalB.board import Board
 
 # This is the entry point for your game playing agent. Currently the agent
 # simply spawns a token at the centre of the board if playing as RED, and
@@ -67,7 +67,5 @@ class Agent:
         match action:
             case SpawnAction(cell):
                 print(f"Testing: {color} SPAWN at {cell}")
-                pass
             case SpreadAction(cell, direction):
                 print(f"Testing: {color} SPREAD from {cell}, {direction}")
-                pass

@@ -1,7 +1,7 @@
 from datetime import datetime
 from os import listdir
 
-from agent.typedefs import BoardModError, SuccessMessage
+from skalB.typedefs import BoardModError, SuccessMessage
 
 class Logger:
     def __init__(self) -> None:

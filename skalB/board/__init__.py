@@ -2,16 +2,20 @@
 This is the main class for maintaining our Board based on the player's
 previous moves
 """
-from typing import Tuple
-from agent.typedefs import BoardDict, BoardModError, Result, SpreadType, SuccessMessage
-from referee.game import \
-    PlayerColor, Action, SpawnAction, SpreadAction, HexPos, HexDir
+from typing import Final, Tuple
 
 import numpy as np
-
+from skalB.typedefs import BoardDict, BoardModError, Result, SpreadType, SuccessMessage
+from referee.game import \
+    PlayerColor, Action, SpawnAction, SpreadAction, HexDir
 from referee.game.hex import HexVec
 
+INITIAL_POINTS: Final[int] = 1
+
 class Board:
+    """
+    Maintains the board from the point of view of the Agent
+    """
     def __init__(self) -> None:
         self.board_dict: BoardDict = dict()
 
@@ -36,7 +40,6 @@ class Board:
         return result
 
     def spawn(self, location: SpawnAction, color: PlayerColor) -> Result[None, BoardModError]:
-        INITIAL_POINTS = 1
         coordinates = location.cell.r, location.cell.q
 
         if coordinates in self.board_dict:
@@ -80,7 +83,10 @@ class Board:
                 if tokens_at_new_pos == 6:
                     del self.board_dict[new_pos]
                 else:
-                    self.board_dict[new_pos] = (self.board_dict[curr_position][0], tokens_at_new_pos + 1)
+                    self.board_dict[new_pos] = (
+                        self.board_dict[curr_position][0],
+                        tokens_at_new_pos + 1
+                    )
             else:
                 self.board_dict[new_pos] = (self.board_dict[curr_position][0], 1)
         del self.board_dict[curr_position]

@@ -53,7 +53,7 @@ class Agent:
 
         if isMaximizingPlayer:
             value = -math.inf
-            for move in self.get_possible_moves(node):
+            for move in self.get_possible_moves(node, self._color):
                 new_node = self.apply_action(node, move, self._color)
                 tmp = self.minimax(new_node, depth-1, False, alpha, beta)[0]
                 if tmp > value:
@@ -65,14 +65,14 @@ class Agent:
                 alpha = max(alpha, value)
         else:
             value = math.inf
-            for move in self.get_possible_moves(node):
+            for move in self.get_possible_moves(node, self._color.opponent):
                 new_node = self.apply_action(node, move, self._color.opponent)
                 tmp = self.minimax(new_node, depth-1, True, alpha, beta)[0]
                 if tmp < value:
                     value = tmp
                     best_movement = move
                 
-                if value <= beta:
+                if value <= alpha:
                     break
                 beta = min(beta, value)
         return value, best_movement
@@ -91,7 +91,7 @@ class Agent:
             case SpreadAction(cell, direction):
                 self.spread(self._board, (cell.r, cell.q, direction.r, direction.q), color)
                 
-    def get_possible_moves(self, board):
+    def get_possible_moves(self, board, player_color):
         possible_moves = []
         for i in range(7):
             for j in range(7):
@@ -100,10 +100,10 @@ class Agent:
                         possible_moves.append(SpawnAction(HexPos(i, j)))
                 else:
                     color = board[(i, j)][0]
-                    if color == PlayerColor.BLUE and self._color == PlayerColor.BLUE:
+                    if color == PlayerColor.BLUE and player_color == PlayerColor.BLUE:
                         for direction in DIRECTIONS:
                             possible_moves.append(SpreadAction(HexPos(i, j), direction))
-                    elif color == PlayerColor.RED and self._color == PlayerColor.RED:
+                    elif color == PlayerColor.RED and player_color == PlayerColor.RED:
                         for direction in DIRECTIONS:
                             possible_moves.append(SpreadAction(HexPos(i,j), direction))  
         return possible_moves

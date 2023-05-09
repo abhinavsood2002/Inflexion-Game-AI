@@ -19,8 +19,8 @@ ENDGAME: Set[GameState] = {
     GameState.RED_WINS,
     GameState.DRAW
 }
-# MAX_NUM_MOVES: Final[int] = 343
-MAX_NUM_MOVES: Final[int] = 10
+MAX_NUM_MOVES: Final[int] = 343
+# MAX_NUM_MOVES: Final[int] = 10
 
 class BoardCSV:
     """

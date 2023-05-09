@@ -33,8 +33,8 @@ class BoardCSV:
     # invalid pattern: "1, 2, r, 3\n"
     pattern = re.compile(r"([0-6],[0-6],[rb],\d\n)+")
     def __init__(self, string: str) -> None:
-        if not BoardCSV.pattern.match(string):
-            raise ValueError("Not a valid CSV representation of the Board")
+        if len(string) > 0 and not BoardCSV.pattern.match(string):
+            raise ValueError(f"Not a valid CSV representation of the Board\n{string}\n")
         self.string = string
 
     def __str__(self) -> str:

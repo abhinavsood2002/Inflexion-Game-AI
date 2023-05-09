@@ -3,7 +3,7 @@ The place to implement heuristic-like functions
 """
 from enum import Enum
 from typing import Generator, List, Optional, Tuple
-from random import shuffle
+from random import shuffle, choice
 from mcts1.typedefs import BoardDict, BoardKey, ColorChar
 from referee.game.actions import Action, SpawnAction, SpreadAction
 from referee.game.hex import HexDir, HexPos
@@ -18,7 +18,7 @@ def generate_action(board, color: PlayerColor) -> Generator[Action, None, None]:
     # TODO: Make a function that decides the action to take by assessing the
     #       state of the board
     # TODO: Implement the action to take
-    _, opponent_tokens, _, player_tokens, _ \
+    _, opponent_tokens, opponent_points, player_tokens, player_points \
             = extract_data(board, color)
     color_char: ColorChar = 'r' \
             if color == PlayerColor.RED \
@@ -27,10 +27,10 @@ def generate_action(board, color: PlayerColor) -> Generator[Action, None, None]:
     if type(action_choice) == Action: 
         yield action_choice # type: ignore
 
-    if action_choice == ActionChoice.SPREAD_DOMINATE:
-        # Find the spread that occupies most opponent tokens
-        for spread in make_spreads_generator(board, player_tokens, color_char):
-            yield spread
+    # if action_choice == ActionChoice.SPREAD_DOMINATE:
+    #     # Find the spread that occupies most opponent tokens
+    #     for spread in make_spreads_generator(board, player_tokens, color_char):
+    #         yield spread
 
     # Assumption: No better choice can be found, its time to choose randomly
     rand_choices = []
@@ -39,9 +39,17 @@ def generate_action(board, color: PlayerColor) -> Generator[Action, None, None]:
             if (r,q) not in board.board_dict:
                 rand_choices.append((r,q))
     shuffle(rand_choices)
+    if len(rand_choices) == 0 or opponent_points + player_points >= 49:
+        pl_token_list = list(player_tokens)
+        shuffle(pl_token_list)
+        for i in pl_token_list:
+            r, q = i
+            direction = choice(list(HexDir))
+            yield SpreadAction(HexPos(r, q), direction)
     while len(rand_choices) > 1:
         r, q = rand_choices.pop()
         yield SpawnAction(HexPos(r, q))
+
     r, q = rand_choices.pop()
     yield SpawnAction(HexPos(r, q))
 

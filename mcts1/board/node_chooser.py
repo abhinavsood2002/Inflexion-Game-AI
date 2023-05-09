@@ -27,10 +27,10 @@ def generate_action(board, color: PlayerColor) -> Generator[Action, None, None]:
     if type(action_choice) == Action: 
         yield action_choice # type: ignore
 
-    # if action_choice == ActionChoice.SPREAD_DOMINATE:
-    #     # Find the spread that occupies most opponent tokens
-    #     for spread in make_spreads_generator(board, player_tokens, color_char):
-    #         yield spread
+    if action_choice == ActionChoice.SPREAD_DOMINATE:
+        # Find the spread that occupies most opponent tokens
+        for spread in make_spreads_generator(board, player_tokens, color_char):
+            yield spread
 
     # Assumption: No better choice can be found, its time to choose randomly
     rand_choices = []
@@ -88,16 +88,19 @@ def get_spreads_list(board, player_tokens, color_char) \
                 )
                 if candidate_spawn not in board.board_dict:
                     continue
-                candidate_color, _ = board.board_dict[candidate_spawn]
-                num_overtaken += int(candidate_color != color_char)
-            finlist.append(
-                (SpreadAction(
-                    HexPos(
-                        pl_r,
-                        pl_q),
-                    current_dir),
-                 num_overtaken)
-            )
+                candidate_color, power = board.board_dict[candidate_spawn]
+                if candidate_color != color_char:
+                    num_overtaken += power
+                # num_overtaken += int(candidate_color != color_char)
+            if num_overtaken > 0:
+                finlist.append(
+                    (SpreadAction(
+                        HexPos(
+                            pl_r,
+                            pl_q),
+                        current_dir),
+                     num_overtaken)
+                )
     return finlist
 
 class ActionChoice(Enum):

@@ -10,7 +10,7 @@ from copy import deepcopy
 import math
 
 DIRECTIONS = (HexDir.DownRight, HexDir.Down, HexDir.DownLeft, HexDir.UpLeft, HexDir.Up, HexDir.UpRight)
-CUTOFF_DEPTH = 3
+CUTOFF_DEPTH = 5
 # This is the entry point for your game playing agent. Currently the agent
 # simply spawns a token at the centre of the board if playing as RED, and
 # spreads a token at the centre of the board if playing as BLUE. This is
@@ -25,6 +25,7 @@ class Agent:
         self._color = color
         self._board = dict()
         self._turn = 0
+        self._table = dict()
         match color:
             case PlayerColor.RED:
                 print("Testing: I am playing as red")
@@ -35,6 +36,7 @@ class Agent:
         """
         Return the next action to take.
         """
+        print(referee)
         return self.minimax(self._board, CUTOFF_DEPTH, True, -math.inf, math.inf)[1]
 
     def game_over(self, board, turn):
@@ -48,10 +50,22 @@ class Agent:
     def minimax(self, node, depth, isMaximizingPlayer, alpha, beta):
         if depth == 0 or self.game_over(node, self._turn):
             return power_difference_heuristic(node, self._color), None
-        
+        old_difference = power_difference_heuristic(node, self._color)
+
+        if frozenset(node) in self._table:
+            score, action, flag = self._table[frozenset(node)]
+            if flag == 'exact':
+                return score, action
+            elif flag == 'lower':
+                alpha = max(alpha, score)
+            elif flag == 'upper':
+                beta = min(beta, score)
+
+            if alpha >= beta:
+                return score, action
+            
         if isMaximizingPlayer:
             value = -math.inf
-            old_difference = power_difference_heuristic(node, self._color)
             for move in self.get_possible_moves(node, self._color):
                 new_node = self.apply_action(node, move, self._color)
                 difference = power_difference_heuristic(new_node, self._color)
@@ -66,12 +80,13 @@ class Agent:
                 if value >= beta:
                     break
                 alpha = max(alpha, value)
+            self._table[frozenset(node)] = (value, best_movement, 'lower') if value <= alpha else (value, best_movement, 'exact')
         else:
             value = math.inf
-            old_difference = power_difference_heuristic(node, self._color)
             for move in self.get_possible_moves(node, self._color.opponent):
                 new_node = self.apply_action(node, move, self._color.opponent)
                 difference = power_difference_heuristic(new_node, self._color)
+
                 if difference - old_difference >= 0:
                     continue
                 tmp = self.minimax(new_node, depth-1, True, alpha, beta)[0]
@@ -82,6 +97,7 @@ class Agent:
                 if value <= alpha:
                     break
                 beta = min(beta, value)
+            self._table[frozenset(node)] = (value, best_movement, 'upper') if value >= beta else (value, best_movement, 'exact')
         return value, best_movement
         
     def turn(self, color: PlayerColor, action: Action, **referee: dict):

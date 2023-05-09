@@ -40,7 +40,7 @@ class Agent:
                 time_elapsed += self._current_board.train_MCTS(self._color, self.num_moves)
             return self._current_board.find_action()
 
-        for _ in range(100):
+        for _ in range(5):
             self._current_board.train_MCTS(self._color, self.num_moves)
 
         return self._current_board.find_action()

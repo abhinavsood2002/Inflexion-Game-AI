@@ -19,7 +19,8 @@ ENDGAME: Set[GameState] = {
     GameState.RED_WINS,
     GameState.DRAW
 }
-MAX_NUM_MOVES: Final[int] = 343
+# MAX_NUM_MOVES: Final[int] = 343
+MAX_NUM_MOVES: Final[int] = 10
 
 class BoardCSV:
     """
@@ -114,7 +115,11 @@ class MCTS_Values:
                 if self.color_to_move == PlayerColor.BLUE \
                 else PlayerColor.BLUE
         while curr_game_state not in ENDGAME:
-            next_action = node_chooser.generate_action(board, current_player).__next__()
+            # track(board, "prev board:", "tracker.txt")
+            next_action = node_chooser \
+                    .generate_action(board, current_player) \
+                    .__next__()
+            # track(board, "curr board", "tracker1.txt")
             board.update_board(next_action, current_player)
             num_moves += 1
             curr_game_state = get_game_state(board, num_moves)
@@ -162,5 +167,14 @@ def get_game_state(board, num_moves) -> GameState: # type: ignore
         return GameState.BLUE_WINS if num_reds == 0 else GameState.RED_WINS
 
     return GameState.PLAYING
+
+def track(board, message: str, filename: str):
+    finstring = f"\n\n{message}"
+    with open(filename, 'w', encoding='utf-8') as file:
+        board_keys = list(board.board_dict)
+        board_keys.sort(key=lambda x: int(f"{x[0]}{x[1]}"))
+        for i in board_keys:
+            finstring += f"{i}:{board.board_dict[i]}\n"
+        file.write(finstring)
 
 MCTS = Dict[BoardCSV, MCTS_Values]

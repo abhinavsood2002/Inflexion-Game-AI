@@ -27,23 +27,23 @@ class Agent:
         self._color = color
         self._current_board = Board()
         self._game_logger = Logger()
+        self.num_moves = 0
 
     def action(self, **referee: dict) -> Action:
         """
         Return the next action to take.
         """
+        if referee["time_remaining"] is not None:
+            remaining_time: int | float = referee["time_remaining"] # type: ignore
+            time_elapsed: int | float = 0
+            while (remaining_time - time_elapsed) > 0:
+                time_elapsed += self._current_board.train_MCTS(self._color, self.num_moves)
+            return self._current_board.find_action()
 
-        final_action: Action
-        match self._color:
-            case PlayerColor.RED:
-                final_action = SpawnAction(HexPos(3, 3))
-            case PlayerColor.BLUE:
-                # This is going to be invalid... BLUE never spawned!
-                final_action = SpreadAction(HexPos(3, 3), HexDir.Up)
-                final_action = SpawnAction(HexPos(3, 4))
+        for _ in range(100):
+            self._current_board.train_MCTS(self._color, self.num_moves)
 
-        # self._current_board.append(final_action)
-        return final_action
+        return self._current_board.find_action()
 
     def turn(self, color: PlayerColor, action: Action, **referee: dict):
         """
@@ -51,3 +51,5 @@ class Agent:
         """
         result = self._current_board.update_board(action, color)
         self._game_logger.log_board_result(result)
+        self.num_moves += 1
+        print(f"\n\nnum_moves: {self.num_moves}")

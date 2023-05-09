@@ -3,14 +3,16 @@ This is the main class for maintaining our Board based on the player's
 previous moves
 """
 from time import time
-from typing import Literal, Union as Result, Final, Tuple, Optional
+from typing import Dict, Literal, Union as Result, Final, Tuple, Optional
+from copy import deepcopy
 
 import numpy as np
-from mcts1.board.mcts import MCTS, BoardCSV
-from mcts1.typedefs import BoardDict, BoardModError, SpreadType, SuccessMessage
+from mcts1.board.mcts import MCTS, BoardCSV, MCTS_Values
+from mcts1.board import node_chooser
+from mcts1.typedefs import BoardDict, BoardModError, ColorChar, SpreadType, SuccessMessage
 from referee.game import \
     PlayerColor, Action, SpawnAction, SpreadAction, HexDir
-from referee.game.hex import HexVec
+from referee.game.hex import HexPos, HexVec
 
 INITIAL_POINTS: Final[int] = 1
 
@@ -20,6 +22,7 @@ class Board:
     """
     # Father of all MCTS nodes
     adam: MCTS = {}
+    actions: Dict[str, Action] = {}
 
     def __init__(self, board_dict: Optional[BoardDict] = None) -> None:
         if board_dict is None:
@@ -56,7 +59,7 @@ class Board:
         if coordinates in self.board_dict:
             return BoardModError.OCCUPIED_CELL_SPAWN
 
-        color_char: Literal['r', 'b']
+        color_char: ColorChar
         match color:
             case PlayerColor.RED:
                 color_char = 'r'
@@ -114,24 +117,76 @@ class Board:
         """
         board_dict = parse_input(str(board))
         return Board(board_dict)
-    
-    def build_MCTS(self) -> float:
+
+    def train_MCTS(self, color: PlayerColor, num_moves: int) -> float:
         """
         Executes the Monte Carlo Tree Search algorithm to keep building the
         Monte Carlo tree
         Return: The time it took to build the tree
         """
         starting_time = time()
-        # TODO: Handle the case for completely untrained data
-        # TODO: Select the appropriate node for executing MCTS on
-        # TODO: Use MCTS_Values to get upper_confidence bounds and choose a
-        #       child
-        # TODO: Expand the chosen node once
-        # TODO: Execute playout
+
+        original_board: BoardCSV = BoardCSV.from_Board(self.board_dict)
+        chosen_node: MCTS_Values
+        if original_board not in Board.adam:
+            chosen_node = MCTS_Values(original_board, color=color)
+            Board.adam[original_board] = chosen_node
+            # print(f"\n\nOVER HERE\n\nBoard.adam: {Board.adam}")
+        else:
+            chosen_node = Board.adam[original_board]
+
+        while chosen_node.playouts != 0:
+            # Use MCTS_Values to get upper_confidence bounds to choose a child
+            children = chosen_node.children.items()
+
+            if len(children) <= 5:
+                break
+
+            playouts: int = chosen_node.playouts
+            chosen_node = max(
+                children,
+                key=lambda x: x[1].get_upper_confidence_bound(playouts)
+            )[1]
+
+        # Expand the chosen node once
+        curr_board: Board = Board.from_BoardCSV(chosen_node.curr_board)
+
+        new_action: Action
+        if len(curr_board.board_dict) == 0:
+            new_action = SpawnAction(HexPos(3, 3))
+            curr_board.update_board(new_action, color)
+            new_board: BoardCSV = BoardCSV.from_Board(curr_board.board_dict)
+        else:
+            action_iter = node_chooser.generate_action(curr_board, color)
+            new_action = action_iter.__next__()
+            new_board = self.get_new_board(color, curr_board, new_action)
+            while new_board in chosen_node.children:
+                new_action = action_iter.__next__()
+                new_board = self.get_new_board(color, curr_board, new_action)
+
+        board_connector = original_board.get_BoardCSV_connector(new_board)
+        Board.actions[board_connector] = new_action
+        new_node = MCTS_Values(new_board, chosen_node)
+
+        # Execute playout
+        increment = new_node.do_playout(curr_board, num_moves + 1)
+
+        for board_csv in new_node.derives_from:
+            Board.adam[board_csv].playouts += 1
+            Board.adam[board_csv].num_wins += increment
+
+        chosen_node.children[new_board] = new_node
+        # Add the modified version of the current line
+        Board.adam[new_board] = new_node
         # TODO: Find a way to export the data to json for pre-loading data
         # TODO: Implement (in __init__) a way to load the pre-trained data
-        raise NotImplementedError
         return time() - starting_time
+
+    def get_new_board(self, color, curr_board, new_action):
+        candidate_board = deepcopy(curr_board)
+        candidate_board.update_board(new_action, color)
+        new_board = BoardCSV.from_Board(candidate_board.board_dict)
+        return new_board
 
     def find_action(self) -> Action:
         """
@@ -139,14 +194,21 @@ class Board:
         """
         # TODO: Select the appropriate node for current board state
         # TODO: Return the action which contains the highest number of playouts
-        raise NotImplementedError
+        original_board: BoardCSV = BoardCSV.from_Board(self.board_dict)
+        chosen_node = Board.adam[original_board]
+        most_playouts_node = max(
+            chosen_node.children.items(),
+            key=lambda x: x[1].playouts
+        )[0]
+        board_connector = original_board.get_BoardCSV_connector(most_playouts_node)
+        return Board.actions[board_connector]
 
 def parse_input(board_csv: str) -> BoardDict:
     """
     Parse board_csv into a dictionary of board cell states.
     """
-    return {
-        (int(r), int(q)): (p.strip(), int(k))
+    return { # type: ignore
+        (int(r), int(q)): (p.strip(), int(k)) # type: ignore
         for r, q, p, k in [
             line.split(',') for line in board_csv.splitlines()
             if len(line.strip()) > 0

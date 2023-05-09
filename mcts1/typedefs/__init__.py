@@ -3,15 +3,16 @@ This file serves to outline the different type abstractions used for the
 board for making function definitions explicit yet understandable
 """
 
-from typing import Dict, Tuple
+from typing import Dict, Literal, Tuple
 from enum import Enum
 
 from referee.game.actions import Action
 from referee.game.player import PlayerColor
 
+ColorChar = Literal['r', 'b']
 SpreadType = Tuple[int, int, int, int]
 BoardKey = Tuple[int, int]
-BoardValue = Tuple[str, int]
+BoardValue = Tuple[ColorChar, int]
 BoardDict = Dict[BoardKey, BoardValue]
 CellPosition = Tuple[int, int]
 
@@ -36,3 +37,12 @@ class SuccessMessage:
 
     def __str__(self) -> str:
         return f"Successfully executed {self.action} for {self.color}"
+
+class GameState(Enum):
+    """
+    Describes the current state/progress of the board
+    """
+    PLAYING = object()
+    BLUE_WINS = object()
+    RED_WINS = object()
+    DRAW = object()

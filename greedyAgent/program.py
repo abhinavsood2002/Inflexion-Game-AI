@@ -37,9 +37,7 @@ class Agent:
         
         for move in self.get_possible_moves():
             new_board = self.apply_action(self._board, move, self._color)
-            blue_tokens = {(b_x, b_y): (b_c, b_v) for (b_x, b_y), (b_c, b_v) in new_board.items() if b_c == PlayerColor.BLUE}
-            red_tokens = {(r_x, r_y): (r_c, r_v) for (r_x, r_y), (r_c, r_v) in new_board.items() if r_c == PlayerColor.RED}
-            move_values.append((move, power_difference_heuristic(red_tokens, blue_tokens, self._color)))
+            move_values.append((move, power_difference_heuristic(new_board, self._color)))
         random.shuffle(move_values)
         return max(move_values, key = lambda x: x[1])[0]
 

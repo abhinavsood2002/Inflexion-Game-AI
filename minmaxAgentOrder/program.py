@@ -30,11 +30,26 @@ class Agent:
                 print("Testing: I am playing as red")
             case PlayerColor.BLUE:
                 print("Testing: I am playing as blue")
+    
+    def game_just_started(self):
+        if self._turn < 10:
+            return 1
+        else:
+            return 0
 
     def action(self, **referee: dict) -> Action:
         """
         Return the next action to take.
         """
+        print(power_difference_heuristic(self._board, self._color))
+        if power_difference_heuristic(self._board, self._color) > 15:
+            move_values = []
+            for move in self.get_possible_moves(self._board, self._color):
+                new_board = self.apply_action(self._board, move, self._color)
+                move_values.append((move, power_difference_heuristic(new_board, self._color)))
+            random.shuffle(move_values)
+            return max(move_values, key = lambda x: x[1])[0]
+        
         return self.minimax(self._board, CUTOFF_DEPTH, True, -math.inf, math.inf)[1]
 
     def game_over(self, board, turn):
@@ -90,21 +105,28 @@ class Agent:
                 self.spread(self._board, (cell.r, cell.q, direction.r, direction.q), color)
                 
     def get_possible_moves(self, board, player_color):
-        possible_moves = []
+        spawns = []
+        spreads = {6: [], 5: [], 4: [], 3: [], 2: [], 1: []}
+        total_power = sum([x[1] for x in board.values()])
         for i in range(7):
             for j in range(7):
                 if not((i, j) in board):
-                    if  sum([x[1] for x in board.values()]) < 49:
-                        possible_moves.append(SpawnAction(HexPos(i, j)))
+                    if total_power < 49:
+                        spawns.append(SpawnAction(HexPos(i, j)))
                 else:
-                    color = board[(i, j)][0]
+                    color, tokens_at = board[(i, j)]
                     if color == PlayerColor.BLUE and player_color == PlayerColor.BLUE:
                         for direction in DIRECTIONS:
-                            possible_moves.append(SpreadAction(HexPos(i, j), direction))
+                            spreads[tokens_at].append(SpreadAction(HexPos(i, j), direction))
                     elif color == PlayerColor.RED and player_color == PlayerColor.RED:
                         for direction in DIRECTIONS:
-                            possible_moves.append(SpreadAction(HexPos(i,j), direction))  
-        random.shuffle(possible_moves)
+                            spreads[tokens_at].append(SpreadAction(HexPos(i, j), direction))
+        importance_of_spawns = 0
+        random.shuffle(spawns)
+        if self.game_just_started:
+            possible_moves = spawns + spreads[6] + spreads[5] + spreads[4] + spreads[3] + spreads[2] + spreads[1]
+        else:
+            possible_moves = spreads[6] + spreads[5] + spreads[4] + spreads[3] + spreads[2] + spreads[1] + spawns 
         return possible_moves
     
     def spread(self, board, move, color):

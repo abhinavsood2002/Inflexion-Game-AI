@@ -29,23 +29,25 @@ def surround_heuristic(red_tokens, blue_tokens, player_color):
 
     return surround_value
 
-def token_difference_heuristic(red_tokens, blue_tokens, player_color):
-    red_num = len(red_tokens)
-    blue_num = len(blue_tokens)
-
-    if red_num + blue_num == 0:
-        return 0
-    
-    red_proportion = (red_num - blue_num)
+def token_difference_heuristic(board, player_color):
+    red_proportion = 0
+    for (c, v) in board.values():
+        if c == PlayerColor.RED:
+            red_proportion += 1
+        else:
+            red_proportion -= 1
     if player_color == PlayerColor.RED:
         return red_proportion
     else:
         return -1 * red_proportion
 
-def power_difference_heuristic(red_tokens, blue_tokens, player_color): 
-    red_power = sum([v[1] for v in red_tokens.values()])  
-    blue_power = sum([v[1] for v in blue_tokens.values()])
-    red_proportion = (red_power - blue_power)
+def power_difference_heuristic(board, player_color):
+    red_proportion = 0
+    for (c, v) in board.values():
+        if c == PlayerColor.RED:
+            red_proportion += v
+        else:
+            red_proportion -= v
     if player_color == PlayerColor.RED:
         return red_proportion
     else:

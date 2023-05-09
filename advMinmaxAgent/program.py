@@ -47,7 +47,7 @@ class Agent:
     # Our minimax implementation is based on https://papers-100-lines.medium.com/the-minimax-algorithm-and-alpha-beta-pruning-tutorial-in-30-lines-of-python-code-e4a3d97fa144
     def minimax(self, node, depth, isMaximizingPlayer, alpha, beta):
         if depth == 0 or self.game_over(node, self._turn):
-            return power_difference_heuristic(node, self._color), None
+            return power_difference_heuristic(node, self._color) + 0.5 * token_difference_heuristic(node, self._color), None
 
         if isMaximizingPlayer:
             value = -math.inf

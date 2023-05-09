@@ -48,11 +48,16 @@ class Agent:
     def minimax(self, node, depth, isMaximizingPlayer, alpha, beta):
         if depth == 0 or self.game_over(node, self._turn):
             return power_difference_heuristic(node, self._color), None
-
+        
         if isMaximizingPlayer:
             value = -math.inf
+            old_difference = power_difference_heuristic(node, self._color)
             for move in self.get_possible_moves(node, self._color):
                 new_node = self.apply_action(node, move, self._color)
+                difference = power_difference_heuristic(new_node, self._color)
+                if difference - old_difference <= 0:
+                    continue
+                
                 tmp = self.minimax(new_node, depth-1, False, alpha, beta)[0]
                 if tmp > value:
                     value = tmp
@@ -63,8 +68,12 @@ class Agent:
                 alpha = max(alpha, value)
         else:
             value = math.inf
+            old_difference = power_difference_heuristic(node, self._color)
             for move in self.get_possible_moves(node, self._color.opponent):
                 new_node = self.apply_action(node, move, self._color.opponent)
+                difference = power_difference_heuristic(new_node, self._color)
+                if difference - old_difference >= 0:
+                    continue
                 tmp = self.minimax(new_node, depth-1, True, alpha, beta)[0]
                 if tmp < value:
                     value = tmp

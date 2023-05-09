@@ -3,7 +3,7 @@ The place to implement heuristic-like functions
 """
 from enum import Enum
 from typing import Generator, List, Optional, Tuple
-from random import shuffle
+from random import shuffle, choice
 from mcts1.typedefs import BoardDict, BoardKey, ColorChar
 from referee.game.actions import Action, SpawnAction, SpreadAction
 from referee.game.hex import HexDir, HexPos
@@ -27,10 +27,10 @@ def generate_action(board, color: PlayerColor) -> Generator[Action, None, None]:
     if type(action_choice) == Action: 
         yield action_choice # type: ignore
 
-    if action_choice == ActionChoice.SPREAD_DOMINATE:
-        # Find the spread that occupies most opponent tokens
-        for spread in make_spreads_generator(board, player_tokens, color_char):
-            yield spread
+    # if action_choice == ActionChoice.SPREAD_DOMINATE:
+    #     # Find the spread that occupies most opponent tokens
+    #     for spread in make_spreads_generator(board, player_tokens, color_char):
+    #         yield spread
 
     # Assumption: No better choice can be found, its time to choose randomly
     rand_choices = []
@@ -42,6 +42,14 @@ def generate_action(board, color: PlayerColor) -> Generator[Action, None, None]:
     while len(rand_choices) > 1:
         r, q = rand_choices.pop()
         yield SpawnAction(HexPos(r, q))
+    if len(rand_choices) == 0:
+        pl_token_list = list(player_tokens)
+        shuffle(pl_token_list)
+        for i in pl_token_list:
+            r, q = i
+            direction = choice(list(HexDir))
+            yield SpreadAction(HexPos(r, q), direction)
+
     r, q = rand_choices.pop()
     yield SpawnAction(HexPos(r, q))
 

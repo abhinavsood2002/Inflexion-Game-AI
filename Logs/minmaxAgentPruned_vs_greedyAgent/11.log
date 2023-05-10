@@ -1,0 +1,61 @@
+T0000.000	referee	game_begin
+T0000.006	RED	initialising
+T0000.527	BLUE	initialising
+T0001.006	RED	turn_begin	1
+T0001.101	RED	turn_end	1	SPAWN(3, 1)
+T0001.106	referee	board_update
+T0001.130	BLUE	turn_begin	2
+T0001.147	BLUE	turn_end	2	SPAWN(0, 5)
+T0001.154	referee	board_update
+T0001.176	RED	turn_begin	3
+T0001.413	RED	turn_end	3	SPAWN(2, 5)
+T0001.418	referee	board_update
+T0001.439	BLUE	turn_begin	4
+T0001.457	BLUE	turn_end	4	SPAWN(3, 3)
+T0001.462	referee	board_update
+T0001.482	RED	turn_begin	5
+T0001.704	RED	turn_end	5	SPAWN(2, 4)
+T0001.709	referee	board_update
+T0001.726	BLUE	turn_begin	6
+T0001.739	BLUE	turn_end	6	SPREAD(3, 3, -1, 1)
+T0001.743	referee	board_update
+T0001.761	RED	turn_begin	7
+T0002.347	RED	turn_end	7	SPREAD(2, 5, 0, -1)
+T0002.353	referee	board_update
+T0002.378	BLUE	turn_begin	8
+T0002.398	BLUE	turn_end	8	SPAWN(5, 3)
+T0002.405	referee	board_update
+T0002.440	RED	turn_begin	9
+T0002.655	RED	turn_end	9	SPAWN(5, 4)
+T0002.660	referee	board_update
+T0002.681	BLUE	turn_begin	10
+T0002.696	BLUE	turn_end	10	SPREAD(5, 3, 0, 1)
+T0002.701	referee	board_update
+T0002.722	RED	turn_begin	11
+T0003.236	RED	turn_end	11	SPREAD(2, 4, 1, 0)
+T0003.241	referee	board_update
+T0003.256	BLUE	turn_begin	12
+T0003.267	BLUE	turn_end	12	SPAWN(1, 0)
+T0003.271	referee	board_update
+T0003.287	RED	turn_begin	13
+T0003.555	RED	turn_end	13	SPAWN(1, 4)
+T0003.559	referee	board_update
+T0003.573	BLUE	turn_begin	14
+T0003.584	BLUE	turn_end	14	SPREAD(0, 5, 1, -1)
+T0003.588	referee	board_update
+T0003.601	RED	turn_begin	15
+T0004.627	RED	turn_end	15	SPREAD(5, 4, 1, 0)
+T0004.631	referee	board_update
+T0004.644	BLUE	turn_begin	16
+T0004.655	BLUE	turn_end	16	SPAWN(1, 1)
+T0004.659	referee	board_update
+T0004.672	RED	turn_begin	17
+T0005.115	RED	turn_end	17	SPREAD(1, 4, 0, -1)
+T0005.119	referee	board_update
+T0005.132	BLUE	turn_begin	18
+T0005.144	BLUE	turn_end	18	SPREAD(1, 0, 0, 1)
+T0005.147	referee	board_update
+T0005.160	RED	turn_begin	19
+T0005.817	RED	turn_end	19	SPREAD(1, 2, 0, -1)
+T0005.820	referee	board_update
+T0005.860	referee	game_end	winner:RED

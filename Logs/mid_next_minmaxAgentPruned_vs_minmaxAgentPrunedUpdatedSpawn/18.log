@@ -1,0 +1,361 @@
+T0000.000	referee	game_begin
+T0000.005	RED	initialising
+T0000.445	BLUE	initialising
+T0000.887	RED	turn_begin	1
+T0000.969	RED	turn_end	1	SPAWN(0, 3)
+T0000.974	referee	board_update
+T0000.988	BLUE	turn_begin	2
+T0002.006	BLUE	turn_end	2	SPAWN(3, 6)
+T0002.011	referee	board_update
+T0002.025	RED	turn_begin	3
+T0002.297	RED	turn_end	3	SPAWN(5, 6)
+T0002.302	referee	board_update
+T0002.316	BLUE	turn_begin	4
+T0006.638	BLUE	turn_end	4	SPAWN(6, 5)
+T0006.643	referee	board_update
+T0006.656	RED	turn_begin	5
+T0006.836	RED	turn_end	5	SPREAD(5, 6, 1, -1)
+T0006.840	referee	board_update
+T0006.854	BLUE	turn_begin	6
+T0011.554	BLUE	turn_end	6	SPAWN(0, 0)
+T0011.559	referee	board_update
+T0011.572	RED	turn_begin	7
+T0011.835	RED	turn_end	7	SPAWN(4, 5)
+T0011.839	referee	board_update
+T0011.853	BLUE	turn_begin	8
+T0014.963	BLUE	turn_end	8	SPAWN(2, 0)
+T0014.968	referee	board_update
+T0014.981	RED	turn_begin	9
+T0015.224	RED	turn_end	9	SPAWN(1, 3)
+T0015.229	referee	board_update
+T0015.244	BLUE	turn_begin	10
+T0018.460	BLUE	turn_end	10	SPAWN(5, 2)
+T0018.465	referee	board_update
+T0018.479	RED	turn_begin	11
+T0018.784	RED	turn_end	11	SPAWN(5, 4)
+T0018.788	referee	board_update
+T0018.805	BLUE	turn_begin	12
+T0022.049	BLUE	turn_end	12	SPAWN(3, 3)
+T0022.054	referee	board_update
+T0022.068	RED	turn_begin	13
+T0022.506	RED	turn_end	13	SPAWN(6, 0)
+T0022.510	referee	board_update
+T0022.524	BLUE	turn_begin	14
+T0026.985	BLUE	turn_end	14	SPAWN(0, 6)
+T0026.989	referee	board_update
+T0027.003	RED	turn_begin	15
+T0027.480	RED	turn_end	15	SPAWN(4, 6)
+T0027.485	referee	board_update
+T0027.499	BLUE	turn_begin	16
+T0033.389	BLUE	turn_end	16	SPAWN(0, 5)
+T0033.393	referee	board_update
+T0033.407	RED	turn_begin	17
+T0034.462	RED	turn_end	17	SPAWN(5, 6)
+T0034.466	referee	board_update
+T0034.480	BLUE	turn_begin	18
+T0044.352	BLUE	turn_end	18	SPAWN(2, 4)
+T0044.357	referee	board_update
+T0044.371	RED	turn_begin	19
+T0045.121	RED	turn_end	19	SPREAD(4, 5, -1, 1)
+T0045.126	referee	board_update
+T0045.140	BLUE	turn_begin	20
+T0057.115	BLUE	turn_end	20	SPAWN(5, 3)
+T0057.120	referee	board_update
+T0057.136	RED	turn_begin	21
+T0057.783	RED	turn_end	21	SPAWN(4, 0)
+T0057.788	referee	board_update
+T0057.802	BLUE	turn_begin	22
+T0059.039	BLUE	turn_end	22	SPREAD(0, 0, -1, 0)
+T0059.043	referee	board_update
+T0059.062	RED	turn_begin	23
+T0059.853	RED	turn_end	23	SPREAD(6, 5, 0, 1)
+T0059.858	referee	board_update
+T0059.873	BLUE	turn_begin	24
+T0061.900	BLUE	turn_end	24	SPREAD(0, 6, -1, 0)
+T0061.905	referee	board_update
+T0061.919	RED	turn_begin	25
+T0062.490	RED	turn_end	25	SPREAD(6, 0, 0, -1)
+T0062.494	referee	board_update
+T0062.509	BLUE	turn_begin	26
+T0064.880	BLUE	turn_end	26	SPREAD(5, 3, 0, 1)
+T0064.884	referee	board_update
+T0064.897	RED	turn_begin	27
+T0065.942	RED	turn_end	27	SPREAD(6, 4, -1, 0)
+T0065.947	referee	board_update
+T0065.960	BLUE	turn_begin	28
+T0067.296	BLUE	turn_end	28	SPAWN(5, 5)
+T0067.301	referee	board_update
+T0067.315	RED	turn_begin	29
+T0068.089	RED	turn_end	29	SPREAD(5, 4, 0, -1)
+T0068.093	referee	board_update
+T0068.109	BLUE	turn_begin	30
+T0070.792	BLUE	turn_end	30	SPREAD(5, 5, 1, 0)
+T0070.797	referee	board_update
+T0070.811	RED	turn_begin	31
+T0074.016	RED	turn_end	31	SPREAD(6, 6, 0, -1)
+T0074.021	referee	board_update
+T0074.035	BLUE	turn_begin	32
+T0077.211	BLUE	turn_end	32	SPREAD(2, 0, 1, -1)
+T0077.216	referee	board_update
+T0077.230	RED	turn_begin	33
+T0081.566	RED	turn_end	33	SPREAD(4, 6, -1, 0)
+T0081.571	referee	board_update
+T0081.584	BLUE	turn_begin	34
+T0083.005	BLUE	turn_end	34	SPAWN(2, 6)
+T0083.010	referee	board_update
+T0083.024	RED	turn_begin	35
+T0083.920	RED	turn_end	35	SPREAD(3, 6, 0, -1)
+T0083.925	referee	board_update
+T0083.938	BLUE	turn_begin	36
+T0086.863	BLUE	turn_end	36	SPREAD(2, 4, 1, 0)
+T0086.867	referee	board_update
+T0086.881	RED	turn_begin	37
+T0088.810	RED	turn_end	37	SPREAD(5, 2, -1, 1)
+T0088.814	referee	board_update
+T0088.830	BLUE	turn_begin	38
+T0090.126	BLUE	turn_end	38	SPAWN(2, 4)
+T0090.131	referee	board_update
+T0090.145	RED	turn_begin	39
+T0091.098	RED	turn_end	39	SPREAD(3, 4, -1, 0)
+T0091.103	referee	board_update
+T0091.117	BLUE	turn_begin	40
+T0092.711	BLUE	turn_end	40	SPAWN(6, 6)
+T0092.716	referee	board_update
+T0092.730	RED	turn_begin	41
+T0093.629	RED	turn_end	41	SPREAD(2, 4, 0, 1)
+T0093.634	referee	board_update
+T0093.649	BLUE	turn_begin	42
+T0094.431	BLUE	turn_end	42	SPREAD(0, 5, -1, 0)
+T0094.436	referee	board_update
+T0094.449	RED	turn_begin	43
+T0097.220	RED	turn_end	43	SPAWN(5, 0)
+T0097.224	referee	board_update
+T0097.238	BLUE	turn_begin	44
+T0097.728	BLUE	turn_end	44	SPREAD(6, 5, 1, -1)
+T0097.733	referee	board_update
+T0097.747	RED	turn_begin	45
+T0099.277	RED	turn_end	45	SPREAD(1, 4, 0, -1)
+T0099.282	referee	board_update
+T0099.296	BLUE	turn_begin	46
+T0100.835	BLUE	turn_end	46	SPREAD(2, 2, -1, 1)
+T0100.840	referee	board_update
+T0100.854	RED	turn_begin	47
+T0104.131	RED	turn_end	47	SPREAD(0, 3, 1, 0)
+T0104.137	referee	board_update
+T0104.150	BLUE	turn_begin	48
+T0105.856	BLUE	turn_end	48	SPREAD(0, 4, 1, -1)
+T0105.861	referee	board_update
+T0105.875	RED	turn_begin	49
+T0107.002	RED	turn_end	49	SPREAD(3, 3, -1, 0)
+T0107.007	referee	board_update
+T0107.020	BLUE	turn_begin	50
+T0107.880	BLUE	turn_end	50	SPAWN(0, 6)
+T0107.885	referee	board_update
+T0107.899	RED	turn_begin	51
+T0108.687	RED	turn_end	51	SPREAD(5, 0, 1, -1)
+T0108.691	referee	board_update
+T0108.706	BLUE	turn_begin	52
+T0109.818	BLUE	turn_end	52	SPAWN(0, 0)
+T0109.823	referee	board_update
+T0109.837	RED	turn_begin	53
+T0110.665	RED	turn_end	53	SPREAD(2, 3, 0, -1)
+T0110.670	referee	board_update
+T0110.684	BLUE	turn_begin	54
+T0111.679	BLUE	turn_end	54	SPAWN(2, 0)
+T0111.684	referee	board_update
+T0111.699	RED	turn_begin	55
+T0112.542	RED	turn_end	55	SPREAD(2, 6, -1, 0)
+T0112.547	referee	board_update
+T0112.562	BLUE	turn_begin	56
+T0113.729	BLUE	turn_end	56	SPAWN(6, 5)
+T0113.734	referee	board_update
+T0113.747	RED	turn_begin	57
+T0114.831	RED	turn_end	57	SPREAD(6, 6, 0, -1)
+T0114.836	referee	board_update
+T0114.849	BLUE	turn_begin	58
+T0115.989	BLUE	turn_end	58	SPAWN(3, 3)
+T0115.993	referee	board_update
+T0116.007	RED	turn_begin	59
+T0117.020	RED	turn_end	59	SPREAD(2, 2, 1, -1)
+T0117.025	referee	board_update
+T0117.038	BLUE	turn_begin	60
+T0118.332	BLUE	turn_end	60	SPAWN(4, 6)
+T0118.337	referee	board_update
+T0118.351	RED	turn_begin	61
+T0119.403	RED	turn_end	61	SPREAD(4, 0, 0, -1)
+T0119.408	referee	board_update
+T0119.422	BLUE	turn_begin	62
+T0120.402	BLUE	turn_end	62	SPAWN(3, 0)
+T0120.406	referee	board_update
+T0120.420	RED	turn_begin	63
+T0121.624	RED	turn_end	63	SPREAD(3, 2, 0, 1)
+T0121.629	referee	board_update
+T0121.643	BLUE	turn_begin	64
+T0122.843	BLUE	turn_end	64	SPAWN(1, 1)
+T0122.848	referee	board_update
+T0122.862	RED	turn_begin	65
+T0123.943	RED	turn_end	65	SPREAD(4, 6, -1, 1)
+T0123.947	referee	board_update
+T0123.961	BLUE	turn_begin	66
+T0124.936	BLUE	turn_end	66	SPREAD(1, 1, 1, 0)
+T0124.941	referee	board_update
+T0124.955	RED	turn_begin	67
+T0126.370	RED	turn_end	67	SPREAD(3, 0, -1, 1)
+T0126.375	referee	board_update
+T0126.390	BLUE	turn_begin	68
+T0129.004	BLUE	turn_end	68	SPREAD(0, 0, 1, -1)
+T0129.008	referee	board_update
+T0129.022	RED	turn_begin	69
+T0131.051	RED	turn_end	69	SPREAD(2, 5, -1, 1)
+T0131.056	referee	board_update
+T0131.070	BLUE	turn_begin	70
+T0132.439	BLUE	turn_end	70	SPAWN(1, 5)
+T0132.444	referee	board_update
+T0132.457	RED	turn_begin	71
+T0133.706	RED	turn_end	71	SPREAD(0, 6, 1, -1)
+T0133.710	referee	board_update
+T0133.724	BLUE	turn_begin	72
+T0135.121	BLUE	turn_end	72	SPAWN(0, 6)
+T0135.125	referee	board_update
+T0135.139	RED	turn_begin	73
+T0136.302	RED	turn_end	73	SPREAD(2, 1, 0, -1)
+T0136.306	referee	board_update
+T0136.320	BLUE	turn_begin	74
+T0138.547	BLUE	turn_end	74	SPAWN(0, 3)
+T0138.551	referee	board_update
+T0138.565	RED	turn_begin	75
+T0139.952	RED	turn_end	75	SPREAD(6, 4, 1, -1)
+T0139.956	referee	board_update
+T0139.970	BLUE	turn_begin	76
+T0141.990	BLUE	turn_end	76	SPAWN(0, 0)
+T0141.995	referee	board_update
+T0142.009	RED	turn_begin	77
+T0143.497	RED	turn_end	77	SPREAD(1, 6, -1, 1)
+T0143.501	referee	board_update
+T0143.515	BLUE	turn_begin	78
+T0144.313	BLUE	turn_end	78	SPAWN(1, 0)
+T0144.318	referee	board_update
+T0144.332	RED	turn_begin	79
+T0145.875	RED	turn_end	79	SPREAD(0, 0, 1, 0)
+T0145.880	referee	board_update
+T0145.894	BLUE	turn_begin	80
+T0146.726	BLUE	turn_end	80	SPAWN(3, 2)
+T0146.730	referee	board_update
+T0146.745	RED	turn_begin	81
+T0148.249	RED	turn_end	81	SPREAD(1, 2, 1, 0)
+T0148.254	referee	board_update
+T0148.268	BLUE	turn_begin	82
+T0149.439	BLUE	turn_end	82	SPAWN(6, 4)
+T0149.443	referee	board_update
+T0149.457	RED	turn_begin	83
+T0150.963	RED	turn_end	83	SPREAD(6, 3, 0, 1)
+T0150.967	referee	board_update
+T0150.982	BLUE	turn_begin	84
+T0152.080	BLUE	turn_end	84	SPAWN(5, 5)
+T0152.084	referee	board_update
+T0152.098	RED	turn_begin	85
+T0153.626	RED	turn_end	85	SPREAD(0, 3, -1, 1)
+T0153.631	referee	board_update
+T0153.644	BLUE	turn_begin	86
+T0155.035	BLUE	turn_end	86	SPAWN(3, 4)
+T0155.039	referee	board_update
+T0155.053	RED	turn_begin	87
+T0156.563	RED	turn_end	87	SPREAD(4, 3, -1, 1)
+T0156.567	referee	board_update
+T0156.580	BLUE	turn_begin	88
+T0157.669	BLUE	turn_end	88	SPAWN(1, 6)
+T0157.674	referee	board_update
+T0157.687	RED	turn_begin	89
+T0159.266	RED	turn_end	89	SPREAD(2, 6, -1, 0)
+T0159.271	referee	board_update
+T0159.285	BLUE	turn_begin	90
+T0160.210	BLUE	turn_end	90	SPAWN(0, 5)
+T0160.214	referee	board_update
+T0160.227	RED	turn_begin	91
+T0161.759	RED	turn_end	91	SPREAD(5, 5, 1, 0)
+T0161.764	referee	board_update
+T0161.778	BLUE	turn_begin	92
+T0162.820	BLUE	turn_end	92	SPAWN(2, 1)
+T0162.824	referee	board_update
+T0162.837	RED	turn_begin	93
+T0164.658	RED	turn_end	93	SPREAD(1, 6, -1, 0)
+T0164.663	referee	board_update
+T0164.675	BLUE	turn_begin	94
+T0165.574	BLUE	turn_end	94	SPAWN(5, 5)
+T0165.579	referee	board_update
+T0165.592	RED	turn_begin	95
+T0167.206	RED	turn_end	95	SPREAD(2, 2, 0, -1)
+T0167.210	referee	board_update
+T0167.224	BLUE	turn_begin	96
+T0168.415	BLUE	turn_end	96	SPAWN(3, 6)
+T0168.419	referee	board_update
+T0168.433	RED	turn_begin	97
+T0170.401	RED	turn_end	97	SPREAD(6, 5, -1, 0)
+T0170.406	referee	board_update
+T0170.419	BLUE	turn_begin	98
+T0171.303	BLUE	turn_end	98	SPAWN(0, 4)
+T0171.307	referee	board_update
+T0171.320	RED	turn_begin	99
+T0173.265	RED	turn_end	99	SPREAD(3, 1, 0, -1)
+T0173.270	referee	board_update
+T0173.285	BLUE	turn_begin	100
+T0174.487	BLUE	turn_end	100	SPAWN(1, 1)
+T0174.492	referee	board_update
+T0174.505	RED	turn_begin	101
+T0176.389	RED	turn_end	101	SPREAD(0, 6, 0, -1)
+T0176.394	referee	board_update
+T0176.409	BLUE	turn_begin	102
+T0177.374	BLUE	turn_end	102	SPAWN(0, 3)
+T0177.378	referee	board_update
+T0177.391	RED	turn_begin	103
+T0179.299	RED	turn_end	103	SPREAD(1, 0, 0, 1)
+T0179.304	referee	board_update
+T0179.317	BLUE	turn_begin	104
+T0180.238	BLUE	turn_end	104	SPAWN(1, 4)
+T0180.243	referee	board_update
+T0180.256	RED	turn_begin	105
+T0182.300	RED	turn_end	105	SPREAD(3, 4, -1, 0)
+T0182.305	referee	board_update
+T0182.319	BLUE	turn_begin	106
+T0183.149	BLUE	turn_end	106	SPAWN(2, 6)
+T0183.155	referee	board_update
+T0183.170	RED	turn_begin	107
+T0184.973	RED	turn_end	107	SPREAD(3, 5, -1, 1)
+T0184.978	referee	board_update
+T0184.992	BLUE	turn_begin	108
+T0186.220	BLUE	turn_end	108	SPAWN(3, 5)
+T0186.224	referee	board_update
+T0186.239	RED	turn_begin	109
+T0188.172	RED	turn_end	109	SPREAD(4, 5, -1, 0)
+T0188.176	referee	board_update
+T0188.190	BLUE	turn_begin	110
+T0189.134	BLUE	turn_end	110	SPAWN(0, 6)
+T0189.139	referee	board_update
+T0189.152	RED	turn_begin	111
+T0190.956	RED	turn_end	111	SPREAD(2, 1, -1, 1)
+T0190.961	referee	board_update
+T0190.974	BLUE	turn_begin	112
+T0191.857	BLUE	turn_end	112	SPAWN(6, 3)
+T0191.863	referee	board_update
+T0191.883	RED	turn_begin	113
+T0193.907	RED	turn_end	113	SPREAD(5, 3, 1, 0)
+T0193.912	referee	board_update
+T0193.926	BLUE	turn_begin	114
+T0194.517	BLUE	turn_end	114	SPAWN(5, 4)
+T0194.522	referee	board_update
+T0194.535	RED	turn_begin	115
+T0196.074	RED	turn_end	115	SPREAD(2, 4, -1, 1)
+T0196.078	referee	board_update
+T0196.093	BLUE	turn_begin	116
+T0196.458	BLUE	turn_end	116	SPAWN(1, 6)
+T0196.463	referee	board_update
+T0196.476	RED	turn_begin	117
+T0197.343	RED	turn_end	117	SPREAD(1, 4, 0, 1)
+T0197.348	referee	board_update
+T0197.365	BLUE	turn_begin	118
+T0197.449	BLUE	turn_end	118	SPREAD(5, 4, 1, -1)
+T0197.453	referee	board_update
+T0197.467	RED	turn_begin	119
+T0198.326	RED	turn_end	119	SPREAD(1, 1, -1, 1)
+T0198.331	referee	board_update
+T0198.373	referee	game_end	winner:RED

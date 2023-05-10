@@ -1,0 +1,19 @@
+T0000.000	referee	game_begin
+T0000.005	RED	initialising
+T0000.509	BLUE	initialising
+T0001.004	RED	turn_begin	1
+T0001.087	RED	turn_end	1	SPAWN(4, 6)
+T0001.092	referee	board_update
+T0001.105	BLUE	turn_begin	2
+T0001.116	BLUE	turn_end	2	SPAWN(2, 1)
+T0001.120	referee	board_update
+T0001.135	RED	turn_begin	3
+T0001.320	RED	turn_end	3	SPAWN(3, 0)
+T0001.323	referee	board_update
+T0001.339	BLUE	turn_begin	4
+T0001.350	BLUE	turn_end	4	SPREAD(2, 1, 1, -1)
+T0001.353	referee	board_update
+T0001.370	RED	turn_begin	5
+T0002.241	RED	turn_end	5	SPREAD(4, 6, -1, 1)
+T0002.245	referee	board_update
+T0002.313	referee	game_end	winner:RED

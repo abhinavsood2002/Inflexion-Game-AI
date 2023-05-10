@@ -1,0 +1,2 @@
+minmaxAgentPruned wins: 12
+minmaxAgentPrunedUpdatedSpawn wins: 8

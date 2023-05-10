@@ -48,7 +48,7 @@ class Agent:
     def minimax(self, node, depth, isMaximizingPlayer, alpha, beta):
         try:
             if depth == 0 or self.game_over(node, self._turn):
-                return power_difference_heuristic(node, self._color), None
+                return power_difference_heuristic(node, self._color) + 0.5 * token_difference_heuristic(node, self._color), None
             
             if isMaximizingPlayer:
                 value = -math.inf

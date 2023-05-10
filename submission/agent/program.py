@@ -3,7 +3,7 @@
 
 from referee.game import \
     PlayerColor, Action, SpawnAction, SpreadAction, HexPos, HexDir
-from library.heuristics import *
+from .library.heuristics import *
 import numpy as np
 import random
 from copy import deepcopy

@@ -1,0 +1,2 @@
+minmaxAgent wins: 12
+minmaxAgentOrder wins: 8

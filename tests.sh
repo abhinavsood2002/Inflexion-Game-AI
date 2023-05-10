@@ -12,10 +12,10 @@ mkdir -p $log_dir
 
 
 
-for (( i=1; i<=num_games; i++ )); do
+for (( i=0; i<num_games; i++ )); do
   log_file="$log_dir/${i}.log"
-  if (( i % 2 )); then  # randomly assign colors
-    result=$(python -m referee -l $log_file $agent1 $agent2)
+  if (( i % 2 == 0)); then  # randomly assign colors
+    result=$(python -m referee -v 2 -l $log_file -s 250 -t 180 $agent1 $agent2)
     WINNER=$(grep -oP 'winner:\K\w+' $log_file)
     if [ "$WINNER" == "RED" ]; then
         ((wins_agent1++))
